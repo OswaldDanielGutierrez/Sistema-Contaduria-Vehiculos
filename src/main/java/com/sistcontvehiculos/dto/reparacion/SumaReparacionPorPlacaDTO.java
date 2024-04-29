@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SumaReparacionPorPlacaDTO {
 
-    private Double mantenimiento;
+    private Double valorReparacion;
     private String vehiculo;
 
 }

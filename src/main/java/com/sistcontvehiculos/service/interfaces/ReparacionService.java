@@ -1,13 +1,13 @@
 package com.sistcontvehiculos.service.interfaces;
 
 import com.sistcontvehiculos.dto.reparacion.ReparacionDTO;
-import com.sistcontvehiculos.dto.reparacion.SumaReparacionPorPlacaDTO;
 import com.sistcontvehiculos.exception.ReparacionNotFound;
 import com.sistcontvehiculos.exception.VehiculoNotFound;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public interface ReparacionService {
@@ -18,5 +18,5 @@ public interface ReparacionService {
 
     ReparacionDTO editarReparacion(Long id, String fecha) throws ReparacionNotFound;
 
-    List<SumaReparacionPorPlacaDTO> listarSumaReparacionPorPlaca(@PathVariable String fechaReparacion);
+    Map<String, Object> listarSumaReparacionPorPlaca(@PathVariable String fechaReparacion) throws ReparacionNotFound;
 }

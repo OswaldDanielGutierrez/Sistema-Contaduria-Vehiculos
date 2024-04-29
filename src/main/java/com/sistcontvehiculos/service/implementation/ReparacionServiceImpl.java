@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,10 +66,23 @@ public class ReparacionServiceImpl implements ReparacionService {
     }
 
     @Override
-    public List<SumaReparacionPorPlacaDTO> listarSumaReparacionPorPlaca(@PathVariable String fechaReparacion){
+    public Map<String, Object> listarSumaReparacionPorPlaca(@PathVariable String fechaReparacion) throws ReparacionNotFound {
+        List<SumaReparacionPorPlacaDTO> reparaciones = reparacionRepository.findReparacionPorPlaca(fechaReparacion);
+        if (reparaciones.isEmpty()){
+            throw new ReparacionNotFound("No hay una lista de reparaciones para esta fecha: "+fechaReparacion);
+        }
 
-        return reparacionRepository.findReparacionPorPlaca(fechaReparacion);
+        double valorTotal = 0;
+        for (SumaReparacionPorPlacaDTO reparacion: reparaciones){
+            valorTotal += reparacion.getValorReparacion();
+        }
+
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("reparaciones", reparaciones);
+        respuesta.put("valor total: ", valorTotal);
+
+        return respuesta;
+
     }
 
 }
-//        List<SumaReparacionPorPlacaDTO> listaReparaciones = reparacionRepository.findReparacionPorPlaca();

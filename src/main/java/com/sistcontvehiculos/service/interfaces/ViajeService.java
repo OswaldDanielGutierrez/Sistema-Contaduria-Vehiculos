@@ -1,15 +1,16 @@
 package com.sistcontvehiculos.service.interfaces;
 
 import com.sistcontvehiculos.dto.ViajeDTO;
+import com.sistcontvehiculos.dto.ViaticosDTO;
 import com.sistcontvehiculos.exception.ConductorNotFound;
 import com.sistcontvehiculos.exception.VehiculoNotFound;
-import com.sistcontvehiculos.persistence.entity.Viaje;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -20,7 +21,8 @@ public interface ViajeService {
 
     ViajeDTO guardarViaje(ViajeDTO viajeDTO) throws ConductorNotFound, VehiculoNotFound;
 
-    List<Viaje> listarViajesPorVehiculo(@PathVariable Long vehiculoId);
+    Map<String, Object> listarViajesPorVehiculo(@PathVariable Long vehiculoId);
 
-    double viaticosPorCarro(@PathVariable Long vehiculoId);
+
+    List<ViaticosDTO> listarViaticosPorVehiculo(String nombreMes);
 }

@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @PreAuthorize("permitAll()")
@@ -34,8 +35,8 @@ public class GastosController {
     }
 
     @GetMapping("/listarGastosPorConductor")
-    public ResponseEntity<List<SumaGastoPorNombreDTO>> listGastosPorConductor(){
-        return new ResponseEntity<>(gastosService.listarSumaGastoPorNombre(), HttpStatus.OK);
+    public ResponseEntity<Map<String, Object>> listGastosPorConductor(@RequestParam(value = "fechaGasto") String fechaGasto) throws GastoNotFound {
+        return new ResponseEntity<>(gastosService.listarSumaGastoPorNombre(fechaGasto), HttpStatus.OK);
     }
 
     @PostMapping("/gGastos")

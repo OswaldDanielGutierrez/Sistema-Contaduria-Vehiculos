@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SumaGastoPorNombreDTO {
 
-    private double sumaValor;
+    private double valorGastos;
 
     private String nombreConductor;
 }

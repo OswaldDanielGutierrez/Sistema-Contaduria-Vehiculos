@@ -1,9 +1,9 @@
 package com.sistcontvehiculos.controller;
 
 import com.sistcontvehiculos.dto.ViajeDTO;
+import com.sistcontvehiculos.dto.ViaticosDTO;
 import com.sistcontvehiculos.exception.ConductorNotFound;
 import com.sistcontvehiculos.exception.VehiculoNotFound;
-import com.sistcontvehiculos.persistence.entity.Viaje;
 import com.sistcontvehiculos.service.interfaces.ViajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @PreAuthorize("permitAll()")
@@ -33,20 +34,19 @@ public class ViajeController {
         return new ResponseEntity<>(viajeService.listarViajes(), HttpStatus.OK);
     }
 
-    @GetMapping("/lViaje")
+    @GetMapping("/buscarViajesFecha")
     public ResponseEntity<List<ViajeDTO>> listViajeFecha(@RequestParam LocalDate fechaInicio,@RequestParam LocalDate fechaFin){
         return new ResponseEntity<>(viajeService.listarPorFecha(fechaInicio, fechaFin), HttpStatus.OK);
     }
 
-    @GetMapping("/prueb/{vehiculoId}")
-    public ResponseEntity<List<Viaje>> listViajesPorVehiculo(@PathVariable Long vehiculoId) {
+    @GetMapping("/listarViajesVehiculo/{vehiculoId}")
+    public ResponseEntity<Map<String, Object>> listViajesPorVehiculo(@PathVariable Long vehiculoId) {
         return new ResponseEntity<>(viajeService.listarViajesPorVehiculo(vehiculoId), HttpStatus.OK);
     }
 
-    @GetMapping("/viaticos/{vehiculoId}")
-    public ResponseEntity<Double> findViaticos(@PathVariable Long vehiculoId){
-        return new ResponseEntity<>(viajeService.viaticosPorCarro(vehiculoId), HttpStatus.OK);
+    @GetMapping("/listarViaticos")
+    public ResponseEntity<List<ViaticosDTO>> listViaticosVehiculo(@RequestParam String nombreMes){
+        return new ResponseEntity<>(viajeService.listarViaticosPorVehiculo(nombreMes), HttpStatus.OK);
     }
-
 
 }
