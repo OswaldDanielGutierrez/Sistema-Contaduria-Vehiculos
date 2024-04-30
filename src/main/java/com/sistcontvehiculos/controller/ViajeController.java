@@ -18,6 +18,7 @@ import java.util.Map;
 @RestController
 @PreAuthorize("permitAll()")
 @RequestMapping("/api/v1/SCV")
+@CrossOrigin(value = "http://localhost:4200")
 public class ViajeController {
 
     @Autowired

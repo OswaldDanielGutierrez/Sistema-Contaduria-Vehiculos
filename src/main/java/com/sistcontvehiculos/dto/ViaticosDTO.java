@@ -12,4 +12,5 @@ public class ViaticosDTO {
     private String placa;
 
     private double viaticos;
+
 }
